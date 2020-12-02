@@ -1,7 +1,7 @@
-target_sum = 2020
-expenses = []
-
 file = open('puzzle1.in')
+expenses = []
+target_sum = 2020
+
 
 for line in file:
   expense = int(line)
