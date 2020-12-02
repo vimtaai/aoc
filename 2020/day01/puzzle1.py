@@ -2,7 +2,6 @@ file = open('puzzle1.in')
 expenses = []
 target_sum = 2020
 
-
 for line in file:
   expense = int(line)
   expenses.append(expense)
