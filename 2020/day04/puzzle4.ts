@@ -6,7 +6,7 @@ import {
   isHeightValid,
   isIssueYearValid,
   isPasswordIdValid,
-} from "./puzzle4-validators.ts";
+} from "./validators.ts";
 
 const input = await Deno.readTextFile("puzzle4.in");
 

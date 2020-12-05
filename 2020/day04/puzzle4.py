@@ -1,4 +1,4 @@
-import re
+import validators
 
 file = open('puzzle4.in')
 
@@ -19,39 +19,15 @@ class Passport:
     if not self.is_all_keys_present():
       return False
 
-    if not is_year_valid(self.byr, 1920, 2002) or \
-       not is_year_valid(self.iyr, 2010, 2020) or \
-       not is_year_valid(self.eyr, 2020, 2030) or \
-       not is_height_valid(self.hgt) or \
-       not is_hair_color_valid(self.hcl) or \
-       not is_eye_color_valid(self.ecl) or \
-       not is_pid_valid(self.pid):
+    if not validators.is_year_valid(self.byr, 1920, 2002) or \
+       not validators.is_year_valid(self.iyr, 2010, 2020) or \
+       not validators.is_year_valid(self.eyr, 2020, 2030) or \
+       not validators.is_height_valid(self.hgt) or \
+       not validators.is_hair_color_valid(self.hcl) or \
+       not validators.is_eye_color_valid(self.ecl) or \
+       not validators.is_pid_valid(self.pid):
       return False 
     return True
-
-def is_year_valid(value, min, max):
-  if not value.isnumeric():
-    return False
-
-  return min <= int(value) <= max;
-
-def is_height_valid(value):
-  unit = value[len(value)-2:len(value)]
-  if unit != 'cm' and unit != 'in':
-    return False
-  
-  number = int(value[0:len(value)-2])
-  return (unit == 'cm' and (150 <= number <= 193)) or (unit == 'in' and (59 <= number <= 76))
-
-def is_hair_color_valid(value):
-  return re.search('^#[0-9a-f]{6}$', value) != None
-
-def is_eye_color_valid(value):
-  eye_colors = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
-  return value in eye_colors
-
-def is_pid_valid(value):
-  return re.search('^[0-9]{9}$', value) != None
 
 def create_password(data):
   data = ' '.join(data).split(' ')
