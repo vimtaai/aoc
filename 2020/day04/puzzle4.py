@@ -37,7 +37,7 @@ passports = []
 data = []
 
 for line in file:
-  if (line.strip() == ''):  
+  if line.strip() == '':  
     passports.append(create_password(data))
     data = []
   else:

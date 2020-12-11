@@ -1,2 +1,5 @@
 # Editor config
 .vscode
+
+# Cache files
+__pycache__

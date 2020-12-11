@@ -21,7 +21,7 @@ const fieldValidators: { [name: string]: (value: string) => boolean } = {
 };
 
 function parsePassportRecord(passportData: string) {
-  return passportData.split(/ |\r?\n/g);
+  return passportData.split(/ |\n/g);
 }
 
 function createPassportObject(passportData: string[]) {
@@ -43,10 +43,7 @@ function isPasswordValid(passport: { [name: string]: string }) {
   );
 }
 
-const passports = input
-  .split(/\r?\n\r?\n/)
-  .map(parsePassportRecord)
-  .map(createPassportObject);
+const passports = input.split(/\n\n/).map(parsePassportRecord).map(createPassportObject);
 
 console.log(passports.filter(isAllKeysPresent).length);
 console.log(passports.filter(isPasswordValid).length);
