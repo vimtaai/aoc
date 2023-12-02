@@ -3,6 +3,11 @@ function parseDraw(draw) {
   return { number, color };
 }
 
+const games = (await Deno.readTextFile("input.in"))
+  .split("\n")
+  .map((row) => row.split(": ")[1])
+  .map((row) => row.split("; ").map((draw) => draw.split(", ").map(parseDraw)));
+
 function findMaxPerColor(game, index) {
   const maxColors = {};
 
@@ -15,17 +20,12 @@ function findMaxPerColor(game, index) {
   return { id: index + 1, maxColors };
 }
 
-const games = (await Deno.readTextFile("input.in"))
-  .split("\n")
-  .map((row) => row.split(": ")[1])
-  .map((row) => row.split("; ").map((draw) => draw.split(", ").map(parseDraw)));
+const maxColorsPerGame = games.map(findMaxPerColor);
+const availableColors = { red: 12, green: 13, blue: 14 };
 
 function hasEnoughOfAllColors(maxColors, availableColors) {
   return Object.entries(availableColors).every(([color, number]) => maxColors[color] <= number);
 }
-
-const maxColorsPerGame = games.map(findMaxPerColor);
-const availableColors = { red: 12, green: 13, blue: 14 };
 
 const possibleGames = maxColorsPerGame.filter(({ maxColors }) =>
   hasEnoughOfAllColors(maxColors, availableColors)
